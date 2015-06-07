@@ -2,6 +2,7 @@
 #include <pebble.h>
 
 #include "MultiCount.h"
+#include "localization.h"
 #include "errorWindow.h"
 
 static Window *sWindow;
@@ -25,13 +26,10 @@ static void menuSelectClick(struct MenuLayer *menuLayer, MenuIndex *cellIndex, v
 {
 	free(counters[cellIndex->row]);
 
-	for (int i = cellIndex->row; i < COUNTER_NUMBER && counters[cellIndex->row] != NULL; i++)
-		if (i == COUNTER_NUMBER - 1)
-			counters[i] = NULL;
-		else
-			counters[i] = counters[i + 1];
+	for (int i = cellIndex->row; i < counterNumber - 1; i++)
+		counters[i] = counters[i + 1];
+	counters[counterNumber--] = NULL;
 
-	counterNumber--;
 	window_stack_pop(true);
 }
 
@@ -62,7 +60,7 @@ static void windowUnload(struct Window *window)
 void pushDeleteWindow(void)
 {
 	if (counterNumber <= 0) {
-		pushErrorWindow("Oops!\n\nYou don't have any counter");
+		pushErrorWindow(lc(LC_DELETE_ERROR_NO_COUNTER));
 	} else {
 		window_stack_push(sWindow, true);
 	}

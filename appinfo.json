@@ -37,6 +37,16 @@
         "type": "png",
         "name": "INFO_ICON",
         "file": "images/InfoIcon.png"
+      },
+      {
+        "type": "raw",
+        "name": "ENGLISH_LOCALE",
+        "file": "locales/english.txt"
+      },
+      {
+        "type": "raw",
+        "name": "FRENCH_LOCALE",
+        "file": "locales/french.txt"
       }
     ]
   }

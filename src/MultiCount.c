@@ -1,6 +1,7 @@
 #include "MultiCount.h"
 #include <pebble.h>
 
+#include "localization.h"
 #include "addWindow.h"
 #include "deleteWindow.h"
 #include "aboutWindow.h"
@@ -35,11 +36,11 @@ static uint16_t menuGetNumRows(struct MenuLayer *menuLayer, uint16_t section_ind
 static void menuDrawRow(GContext *ctx, const Layer *cellLayer, MenuIndex *cellIndex, void *callbackContext)
 {
 	if (cellIndex->row == counterNumber)
-		menu_cell_basic_draw(ctx, cellLayer, "Add…", NULL, sAddIcon);
+		menu_cell_basic_draw(ctx, cellLayer, lc(LC_ADD), NULL, sAddIcon);
 	else if (cellIndex->row == counterNumber + 1)
-		menu_cell_basic_draw(ctx, cellLayer, "Delete…", NULL, sDeleteIcon);
+		menu_cell_basic_draw(ctx, cellLayer, lc(LC_DELETE), NULL, sDeleteIcon);
 	else if (cellIndex->row == counterNumber + 2)
-		menu_cell_basic_draw(ctx, cellLayer, "About…", NULL, sInfoIcon);
+		menu_cell_basic_draw(ctx, cellLayer, lc(LC_ABOUT), NULL, sInfoIcon);
 	else {
 		char valueStr[MAX_NAME_SIZE + 1];
 		snprintf(valueStr, MAX_NAME_SIZE + 1, "%d", counters[cellIndex->row]->value);
@@ -115,6 +116,8 @@ static void windowAppear(struct Window *window)
 
 static void init(void)
 {
+	initLocales();
+
 	if (persist_exists(STORAGE_VERSION_KEY)) {
 		counterNumber = persist_read_int(COUNTER_NUMBER_KEY);
 		for (int i = 0; i < counterNumber; i++) {
@@ -145,9 +148,11 @@ static void deinit(void)
 {
 	persist_write_int(COUNTER_NUMBER_KEY, counterNumber);
 	for (int i = 0; i < counterNumber; i++) {
-		int lol = persist_write_data(i + FIRST_COUNTER_KEY, counters[i], sizeof **counters);
+		persist_write_data(i + FIRST_COUNTER_KEY, counters[i], sizeof **counters);
 		free(counters[i]);
 	}
+
+	deinitLocales();
 
 	deinitAddWindow();
 	deinitDeleteWindow();

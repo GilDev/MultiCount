@@ -2,6 +2,7 @@
 #include <pebble.h>
 
 #include "MultiCount.h"
+#include "localization.h"
 #include "errorWindow.h"
 
 static Window *sWindow;
@@ -126,7 +127,7 @@ static void selectButtonValue(ClickRecognizerRef recognizer, void *ctx)
 		}
 
 	if (i == 0) {
-		pushErrorWindow("Oops!\n\nYou should specify a name");
+		pushErrorWindow(lc(LC_ADD_ERROR_NO_NAME));
 	} else {
 		createCounter(name, value);
 		window_stack_pop(true);
@@ -180,7 +181,7 @@ static void windowLoad(struct Window *window)
 	sNameTitle = text_layer_create(GRect(0, 0, 144, 50));
 	text_layer_set_font(sNameTitle, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
 	text_layer_set_text_alignment(sNameTitle, GTextAlignmentCenter);
-	text_layer_set_text(sNameTitle, "Name:");
+	text_layer_set_text(sNameTitle, lc(LC_ADD_NAME));
 	layer_add_child(window_get_root_layer(window), text_layer_get_layer(sNameTitle));
 
 	sName = text_layer_create(GRect(10, 40, 124, 25));
@@ -191,7 +192,7 @@ static void windowLoad(struct Window *window)
 	sValueTitle = text_layer_create(GRect(0, 70, 144, 50));
 	text_layer_set_font(sValueTitle, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
 	text_layer_set_text_alignment(sValueTitle, GTextAlignmentCenter);
-	text_layer_set_text(sValueTitle, "Initial Value:");
+	text_layer_set_text(sValueTitle, lc(LC_ADD_INITIAL_VALUE));
 	layer_add_child(window_get_root_layer(window), text_layer_get_layer(sValueTitle));
 
 	sValue = text_layer_create(GRect(10, 110, 124, 25));
@@ -216,8 +217,8 @@ static void windowUnload(struct Window *window)
 
 void pushAddWindow(void)
 {
-	if (counterNumber >= COUNTER_NUMBER) {
-		pushErrorWindow("Oops!\n\nYou cannot add more counters");
+	if (counterNumber >= MAX_COUNTER_NUMBER) {
+		pushErrorWindow(lc(LC_ADD_ERROR_NO_PLACE_LEFT));
 	} else {
 		window_stack_push(sWindow, true);
 	}
