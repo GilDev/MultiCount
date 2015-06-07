@@ -1,0 +1,43 @@
+{
+  "uuid": "b23a15f3-1674-4652-a1cf-ba32b912b42a",
+  "shortName": "MultiCount",
+  "longName": "MultiCount",
+  "companyName": "GilDev",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite"],
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": [
+      {
+        "menuIcon": true,
+        "type": "png",
+        "name": "APP_ICON",
+        "file": "images/AppIcon.png"
+      },
+      {
+        "characterRegex": "[a-zA-Z0-9 !]",
+        "type": "font",
+        "name": "VERA_MONO_BOLD_20",
+        "file": "fonts/VeraMoBd.ttf"
+      },
+      {
+        "type": "png",
+        "name": "ADD_ICON",
+        "file": "images/AddIcon.png"
+      },
+      {
+        "type": "png",
+        "name": "DELETE_ICON",
+        "file": "images/DeleteIcon.png"
+      },
+      {
+        "type": "png",
+        "name": "INFO_ICON",
+        "file": "images/InfoIcon.png"
+      }
+    ]
+  }
+}
