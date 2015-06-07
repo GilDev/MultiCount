@@ -3,7 +3,7 @@
 
 #include <pebble.h>
 
-#define APP_VERSION "1.0"
+#define APP_VERSION "1.1"
 #define STORAGE_VERSION 1
 #define STORAGE_VERSION_KEY 0
 #define COUNTER_NUMBER_KEY 1
@@ -15,8 +15,8 @@
 #define MAX_COUNTER_VALUE 65535
 #define MAX_COUNTER_DIGITS 5
 
-static uint8_t counterNumber;
-static struct Counter *counters[COUNTER_NUMBER];
+uint8_t counterNumber;
+struct Counter *counters[COUNTER_NUMBER];
 
 void createCounter(const char *name, uint16_t value);
 
