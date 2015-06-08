@@ -13,7 +13,7 @@
     "media": [
       {
         "menuIcon": true,
-        "type": "png",
+        "type": "pbi",
         "name": "APP_ICON",
         "file": "images/AppIcon.png"
       },
@@ -24,17 +24,17 @@
         "file": "fonts/VeraMoBd.ttf"
       },
       {
-        "type": "png",
+        "type": "pbi",
         "name": "ADD_ICON",
         "file": "images/AddIcon.png"
       },
       {
-        "type": "png",
+        "type": "pbi",
         "name": "DELETE_ICON",
         "file": "images/DeleteIcon.png"
       },
       {
-        "type": "png",
+        "type": "pbi",
         "name": "INFO_ICON",
         "file": "images/InfoIcon.png"
       },
