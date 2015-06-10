@@ -47,6 +47,11 @@
         "type": "raw",
         "name": "FRENCH_LOCALE",
         "file": "locales/french.txt"
+      },
+      {
+        "type": "raw",
+        "name": "GERMAN_LOCALE",
+        "file": "locales/german.txt"
       }
     ]
   }

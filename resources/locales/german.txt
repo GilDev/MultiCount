@@ -1,0 +1,9 @@
+Hinzusetzen…
+Löschen…
+Über…
+Name:
+Anfangswert:
+Hoppla!||Sie sollen einen Namen angeben
+Hoppla!||Sie können keinen Zähler mehr hinzusetzen
+Hoppla!||Sie haben keinen Zähler
+Wilkommen auf MultiCount V1.2!||Dieses Anwendungsprogramm erlauben Ihnen, einfache Zähler zu verwalten, um was Sie wollen zählen, zum Beispiel wie viele Kaffee Sie pro Woche trinken, oder wie viele Mal Sie "Hallo" pro Tag sagen.||Drücken Sie auf SELECT um zu inkrementieren,|Drücken Sie weiter auf SELECT um zu dekrementieren.||Bei GilDev,|@GilDev über Twitter, zogern Sie nicht, Ihre Reaktionen zu schicken!|Unter MIT license
