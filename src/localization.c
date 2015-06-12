@@ -3,7 +3,7 @@
 
 void initLocales(void)
 {
-	char *locale = setlocale(LC_ALL, "de_DE");
+	char *locale = setlocale(LC_ALL, "");
 
 	ResHandle localeFile;
 	if (strcmp("fr_FR", locale) == 0) {
@@ -25,7 +25,7 @@ void initLocales(void)
 				strings[i] = '\n';
 				break;
 			case '\n':
-				locale = malloc(i - strStartPosition);
+				locale = malloc(i - strStartPosition + 1);
 				memcpy(locale, &strings[strStartPosition], i - strStartPosition);
 				locale[i - strStartPosition] = '\0';
 				str[strCurrentId++] = locale;
