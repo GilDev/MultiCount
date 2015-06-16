@@ -1,0 +1,9 @@
+Añadir…
+Suprimir…
+A propósito…
+Nombre:
+Valor inicial:
+¡Uy!||Usted debe especificar un nombre
+¡Uy!||Usted no puede añadir un nuevo contador
+¡Uy!||Usted no tiene ningún contador
+¡Bienvenido en MultiCount V1.4!||Esta aplicación permite la gestión de una lista de contadores para contar lo que quiere, del número de los cafés que usted bebe a la semana al número de vez que usted saluda al día.||Usted aprieta SELECT para incrementar|Usted mantiene select para decrementar||Por GilDev,|¡@GilDev sobre Twitter, usted no vacile en enviarme sus opiniones o sugerencias!|Bajo licencia MIT

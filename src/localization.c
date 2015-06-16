@@ -10,6 +10,8 @@ void initLocales(void)
 		localeFile = resource_get_handle(RESOURCE_ID_FRENCH_LOCALE);
 	} else if (strcmp("de_DE", locale) == 0) {
 		localeFile = resource_get_handle(RESOURCE_ID_GERMAN_LOCALE);
+	} else if (strcmp("es_ES", locale) == 0) {
+		localeFile = resource_get_handle(RESOURCE_ID_SPANISH_LOCALE);
 	} else {
 		localeFile = resource_get_handle(RESOURCE_ID_ENGLISH_LOCALE);
 	}
@@ -25,7 +27,7 @@ void initLocales(void)
 				strings[i] = '\n';
 				break;
 			case '\n':
-				locale = malloc(i - strStartPosition + 1);
+				locale = malloc(i - strStartPosition);
 				memcpy(locale, &strings[strStartPosition], i - strStartPosition);
 				locale[i - strStartPosition] = '\0';
 				str[strCurrentId++] = locale;

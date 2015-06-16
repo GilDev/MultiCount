@@ -11,6 +11,8 @@ Font used in the "Add" screen: [Bitstream Vera Sans Mono](https://www.gnome.org/
 
 Published under MIT license.
 
+[![MultiCount is available on the Pebble App Store](http://pblweb.com/badge/55747e02f5c314f182000074/orange/medium)](http://apps.getpebble.com/en_US/application/55747e02f5c314f182000074)
+
 
 TODO:
 -----
@@ -18,4 +20,4 @@ TODO:
 * Basalt (Pebble Time) support
 * Better user interface
 * Reordering counters in list
-* Optimizations (save only modified counters to persistent storage for example)
+* Optimizations
