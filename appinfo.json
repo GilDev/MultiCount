@@ -3,7 +3,7 @@
   "shortName": "MultiCount",
   "longName": "MultiCount",
   "companyName": "GilDev",
-  "versionLabel": "1.4",
+  "versionLabel": "2.0",
   "sdkVersion": "3",
   "targetPlatforms": ["aplite"],
   "watchapp": {
