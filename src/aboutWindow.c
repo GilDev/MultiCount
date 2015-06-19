@@ -1,7 +1,6 @@
 #include "aboutWindow.h"
 #include <pebble.h>
 
-#include "MultiCount.h"
 #include "localization.h"
 
 static Window *sWindow;

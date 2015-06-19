@@ -18,6 +18,7 @@ TODO:
 -----
 
 * Basalt (Pebble Time) support
-* Better user interface
-* Reordering counters in list
-* Optimizations
+* Remove the "Initial value" setting when adding a counter?
+* Bug fixes:
+  * Second counter selected in list after deleting the first
+  * Selection color of the close button (SELECT on the second action bar) when used more than once

@@ -27,8 +27,8 @@ void initLocales(void)
 				strings[i] = '\n';
 				break;
 			case '\n':
-				locale = malloc(i - strStartPosition);
-				memcpy(locale, &strings[strStartPosition], i - strStartPosition);
+				locale = malloc(i - strStartPosition + 1);
+				memcpy(locale, &strings[strStartPosition], i - strStartPosition + 1);
 				locale[i - strStartPosition] = '\0';
 				str[strCurrentId++] = locale;
 				strStartPosition = i + 1;

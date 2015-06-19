@@ -8,11 +8,14 @@
 #define COUNTER_NUMBER_KEY 1
 #define FIRST_COUNTER_KEY 2
 
-
 #define MAX_COUNTER_NUMBER 20
 #define MAX_COUNTER_VALUE 65535
 #define MAX_COUNTER_DIGITS 5
 #define MAX_NAME_SIZE 10
+#define NUMBER_MENU_OPTIONS 3 // Add, About, Reset All
+
+#define CLICKS_INTERVAL_INCREMENTING 50
+#define VIBRATION_DURATION 100
 
 uint8_t counterNumber;
 struct Counter *counters[MAX_COUNTER_NUMBER];

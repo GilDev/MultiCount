@@ -1,9 +1,8 @@
 Add…
-Delete…
 About…
+Reset all
 Name:
 Initial value:
 Oops!||You should specify a name
 Oops!||You can't add any more counter
-Oops!||You don't have any counter
-Welcome to MultiCount V1.4!||This app allows you to setup simple counters to count anything you want, from the number of coffee you drink a week to the number of times you say "Hello" a day.||Press SELECT to increment|Hold SELECT to decrement||By GilDev,|@GilDev on Twitter, feel free to send me any feedback!|Under MIT license
+Welcome to MultiCount V2.0!||This app allows you to setup simple counters to count anything you want, from the number of coffee you drink a week to the number of times you say "Hello" a day.||Press SELECT to increment|Hold SELECT to decrement||By GilDev,|@GilDev on Twitter, feel free to send me any feedback!|Under MIT license

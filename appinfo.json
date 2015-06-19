@@ -30,13 +30,43 @@
       },
       {
         "type": "pbi",
-        "name": "DELETE_ICON",
-        "file": "images/DeleteIcon.png"
+        "name": "INFO_ICON",
+        "file": "images/InfoIcon.png"
       },
       {
         "type": "pbi",
-        "name": "INFO_ICON",
-        "file": "images/InfoIcon.png"
+        "name": "RESET_ALL_ICON",
+        "file": "images/ResetAllIcon.png"
+      },
+      {
+        "type": "pbi",
+        "name": "PLUS_ICON",
+        "file": "images/PlusIcon.png"
+      },
+      {
+        "type": "pbi",
+        "name": "MORE_ICON",
+        "file": "images/MoreIcon.png"
+      },
+      {
+        "type": "pbi",
+        "name": "MINUS_ICON",
+        "file": "images/MinusIcon.png"
+      },
+      {
+        "type": "pbi",
+        "name": "REORDER_ICON",
+        "file": "images/ReorderIcon.png"
+      },
+      {
+        "type": "pbi",
+        "name": "CROSS_ICON",
+        "file": "images/CrossIcon.png"
+      },
+      {
+        "type": "pbi",
+        "name": "TRASH_ICON",
+        "file": "images/TrashIcon.png"
       },
       {
         "type": "raw",
