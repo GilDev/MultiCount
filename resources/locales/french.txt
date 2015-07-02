@@ -5,4 +5,4 @@ Nom :
 Valeur initiale :
 Oups !||Vous devez spécifier un nom
 Oups !|Vous ne pouvez pas ajouter de nouveau compteur
-Bienvenue sur MultiCount V2.0 !||Cette application vous permet de gérer une liste de compteurs pour compter ce que vous voulez, du nombre de cafés que vous buvez par semaine au nombre de fois que vous dites "Bonjour" par jour.||Appuyez sur SELECT pour incrémenter|Maintenez SELECT pour décrémenter||Par GilDev,|@GilDev sur Twitter, n'hésitez pas à m'envoyer vos avis ou suggestions !|Sous license MIT
+Bienvenue sur MultiCount V2.0 !||Cette application vous permet de gérer une liste de compteurs pour compter ce que vous voulez, du nombre de cafés que vous buvez par semaine au nombre de fois que vous dites "Bonjour" par jour.||Appuyez sur SELECT pour incrémenter.|Maintenez SELECT pour accéder à plus d'options.||Par GilDev,|@GilDev sur Twitter, n'hésitez pas à m'envoyer vos avis ou suggestions !|Sous license MIT
