@@ -5,4 +5,4 @@ Name:
 Anfangswert:
 Hoppla!||Sie sollen einen Namen angeben
 Hoppla!||Sie können keinen Zähler mehr hinzufügen
-Willkommen bei MultiCount V2.0!||Diese Anwendung erlaubt es Ihnen einfach verschiedene Dinge zu zählen, zum Beispiel wieviel Kaffee Sie pro Woche trinken, oder wieviele Mal Sie pro Tag "Hallo" sagen.||Drücken Sie auf SELECT um den Zähler zu erhöhen.|Halte SELECT um weitere Optionen anzuzeigen.||Entwickelt von GilDev,|Bitte schreiben Sie ihr Lob und ihre Kritik an @GilDev auf Twitter!|Deutsch Übersetzung bei David Gretzschel & Christian Reinbacher|Unter MIT license
+Willkommen bei MultiCount V2.1!||Diese Anwendung erlaubt es Ihnen einfach verschiedene Dinge zu zählen, zum Beispiel wieviel Kaffee Sie pro Woche trinken, oder wieviele Mal Sie pro Tag "Hallo" sagen.||Drücken Sie auf SELECT um den Zähler zu erhöhen.|Halte SELECT um weitere Optionen anzuzeigen.||Entwickelt von GilDev,|Bitte schreiben Sie ihr Lob und ihre Kritik an @GilDev auf Twitter!|Deutsch Übersetzung bei David Gretzschel & Christian Reinbacher|Unter MIT license
