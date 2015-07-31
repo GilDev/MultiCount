@@ -17,10 +17,33 @@
 	configureMenuClicks(); \
 	menu_layer_reload_data(sMenu);
 
+
+#define optionsActionBar() \
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_UP, sReorderIcon); \
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_SELECT, sCrossIcon); \
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_DOWN, sTrashIcon); \
+	action_bar_layer_set_click_config_provider(sActionBar, clickConfigProviderOptions); \
+	sSelectedActionBar = 2;
+
+#define incrementActionBar() \
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_UP, sPlusIcon); \
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_SELECT, sMoreIcon); \
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_DOWN, sMinusIcon); \
+	action_bar_layer_set_click_config_provider(sActionBar, clickConfigProviderIncrement); \
+	sSelectedActionBar = 1;
+
+#define showActionBar() \
+	incrementActionBar(); \
+	action_bar_layer_add_to_window(sActionBar, sWindow);
+
+#define hideActionBar() \
+	action_bar_layer_remove_from_window(sActionBar); \
+	configureMenuClicks(); \
+	sSelectedActionBar = 0;
+
 static Window *sWindow;
 static MenuLayer *sMenu;
-static ActionBarLayer *sIncrementActionBar;
-static ActionBarLayer *sOptionsActionBar;
+static ActionBarLayer *sActionBar;
 static uint8_t sSelectedActionBar = 0; // 0 = None, 1 = Increment, 2 = Options
 
 static GBitmap *sAddIcon;
@@ -36,7 +59,7 @@ static GBitmap *sTrashIcon;
 static struct Counter *counterIdToReorder; // Easily store which counter you are currently reordering
 
 struct {
-	uint8_t crossClick: 1;
+	uint8_t moreClick: 1;
 	uint8_t reordering: 1;
 } states = {false, false};
 
@@ -55,6 +78,8 @@ void createCounter(const char *name, uint16_t value)
 /* ---------- BACK BUTTON HANDLER ---------- */
 
 static void configureMenuClicks();
+static void clickConfigProviderIncrement(void *ctx);
+static void clickConfigProviderOptions(void *ctx);
 
 static void backClick(ClickRecognizerRef recognizer, void *ctx)
 {
@@ -66,14 +91,10 @@ static void backClick(ClickRecognizerRef recognizer, void *ctx)
 				window_stack_pop_all(true);
 				break;
 			case 1:
-				action_bar_layer_remove_from_window(sIncrementActionBar);
-				configureMenuClicks();
-				sSelectedActionBar--;
+				hideActionBar();
 				break;
 			case 2:
-				action_bar_layer_remove_from_window(sOptionsActionBar);
-				action_bar_layer_add_to_window(sIncrementActionBar, sWindow);
-				sSelectedActionBar--;
+				incrementActionBar();
 		}
 	}
 }
@@ -123,8 +144,7 @@ static void menuSelectClick(struct MenuLayer *menuLayer, MenuIndex *cellIndex, v
 static void menuSelectLongClick(struct MenuLayer *menuLayer, MenuIndex *cellIndex, void *callbackContext)
 {
 	if (sSelectedActionBar == 0 && cellIndex->row < counterNumber) {
-		action_bar_layer_add_to_window(sIncrementActionBar, sWindow);
-		sSelectedActionBar++;
+		showActionBar();
 		static const uint32_t duration = VIBRATION_DURATION;
 		vibes_enqueue_custom_pattern((VibePattern) {
 			.durations = &duration,
@@ -198,9 +218,8 @@ static void incrementActionBarUpClick(ClickRecognizerRef recognizer, void *ctx)
 
 static void incrementActionBarSelectClick(ClickRecognizerRef recognizer, void *ctx)
 {
-	states.crossClick = false; // Hack explained in optionsActionBarSelectClick()
-	action_bar_layer_remove_from_window(sIncrementActionBar);
-	action_bar_layer_add_to_window(sOptionsActionBar, sWindow);
+	states.moreClick = true;
+	optionsActionBar();
 	sSelectedActionBar++;
 }
 
@@ -216,37 +235,22 @@ static void incrementActionBarDownClick(ClickRecognizerRef recognizer, void *ctx
 static void clickConfigProviderIncrement(void *ctx)
 {
 	window_single_repeating_click_subscribe(BUTTON_ID_UP, CLICKS_INTERVAL_INCREMENTING, incrementActionBarUpClick);
-	window_raw_click_subscribe(BUTTON_ID_SELECT, incrementActionBarSelectClick, NULL, NULL); // If non-raw, selection color stays when pressing BACK while sOptionsActionBar is shown
+	window_single_click_subscribe(BUTTON_ID_SELECT, incrementActionBarSelectClick); // If non-raw, selection color stays when pressing BACK while sOptionsActionBar is shown
 	window_single_repeating_click_subscribe(BUTTON_ID_DOWN, CLICKS_INTERVAL_INCREMENTING, incrementActionBarDownClick);
 	window_single_click_subscribe(BUTTON_ID_BACK, backClick);
 }
 
 /* Options Action Bar */
 
-#define removeOptionsActionBar() \
-	action_bar_layer_remove_from_window(sOptionsActionBar); \
-	configureMenuClicks(); \
-	sSelectedActionBar = 0;
-
 static void optionsActionBarUpClick(ClickRecognizerRef recognizer, void *ctx)
 {
-	removeOptionsActionBar();
+	hideActionBar();
 	activateReordering();
 }
 
 static void optionsActionBarSelectClick(ClickRecognizerRef recognizer, void *ctx)
 {
-	/* Little hack with states.crossClick to make it works,
-	 * otherwise it will skip the sOptionsActionBar.
-	 * Still, the selection color stays the second time
-	 * sOptionsMenuBar is shown
-	 */
-
-	if (!states.crossClick) {
-		states.crossClick = true;
-	} else {
-		removeOptionsActionBar();
-	}
+	hideActionBar();
 }
 
 static void optionsActionBarDownClick(ClickRecognizerRef recognizer, void *ctx)
@@ -260,7 +264,7 @@ static void optionsActionBarDownClick(ClickRecognizerRef recognizer, void *ctx)
 		counters[i] = counters[i + 1];
 	counters[counterNumber--] = NULL;
 
-	removeOptionsActionBar();
+	hideActionBar();
 
 	counterIdToDelete.row = (row) ? row - 1 : 0; // Because after executing this function, sMenu automatically register a DOWN click. In fact after deleting the first counter, the second one will be selected (bug)
 	menu_layer_set_selected_index(sMenu, counterIdToDelete, MenuRowAlignCenter, false);
@@ -299,22 +303,15 @@ static void windowLoad(Window *window)
 	sPlusIcon = gbitmap_create_with_resource(RESOURCE_ID_PLUS_ICON);
 	sMoreIcon = gbitmap_create_with_resource(RESOURCE_ID_MORE_ICON);
 	sMinusIcon = gbitmap_create_with_resource(RESOURCE_ID_MINUS_ICON);
-
-	sIncrementActionBar = action_bar_layer_create();
-	action_bar_layer_set_icon(sIncrementActionBar, BUTTON_ID_UP, sPlusIcon);
-	action_bar_layer_set_icon(sIncrementActionBar, BUTTON_ID_SELECT, sMoreIcon);
-	action_bar_layer_set_icon(sIncrementActionBar, BUTTON_ID_DOWN, sMinusIcon);
-	action_bar_layer_set_click_config_provider(sIncrementActionBar, clickConfigProviderIncrement);
-
 	sReorderIcon = gbitmap_create_with_resource(RESOURCE_ID_REORDER_ICON);
 	sCrossIcon = gbitmap_create_with_resource(RESOURCE_ID_CROSS_ICON);
 	sTrashIcon = gbitmap_create_with_resource(RESOURCE_ID_TRASH_ICON);
 
-	sOptionsActionBar = action_bar_layer_create();
-	action_bar_layer_set_icon(sOptionsActionBar, BUTTON_ID_UP, sReorderIcon);
-	action_bar_layer_set_icon(sOptionsActionBar, BUTTON_ID_SELECT, sCrossIcon);
-	action_bar_layer_set_icon(sOptionsActionBar, BUTTON_ID_DOWN, sTrashIcon);
-	action_bar_layer_set_click_config_provider(sOptionsActionBar, clickConfigProviderOptions);
+	sActionBar = action_bar_layer_create();
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_UP, sPlusIcon);
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_SELECT, sMoreIcon);
+	action_bar_layer_set_icon(sActionBar, BUTTON_ID_DOWN, sMinusIcon);
+	action_bar_layer_set_click_config_provider(sActionBar, clickConfigProviderIncrement);
 }
 
 static void windowUnload(Window *window)
@@ -328,8 +325,7 @@ static void windowUnload(Window *window)
 	gbitmap_destroy(sReorderIcon);
 	gbitmap_destroy(sCrossIcon);
 	gbitmap_destroy(sTrashIcon);
-	action_bar_layer_destroy(sIncrementActionBar);
-	action_bar_layer_destroy(sOptionsActionBar);
+	action_bar_layer_destroy(sActionBar);
 	menu_layer_destroy(sMenu);
 }
 
