@@ -56,6 +56,9 @@ static GBitmap *sReorderIcon;
 static GBitmap *sCrossIcon;
 static GBitmap *sTrashIcon;
 
+uint8_t counterNumber;
+struct Counter *counters[MAX_COUNTER_NUMBER];
+
 static struct Counter *counterIdToReorder; // Easily store which counter you are currently reordering
 
 struct {

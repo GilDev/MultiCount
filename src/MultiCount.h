@@ -17,8 +17,8 @@
 #define CLICKS_INTERVAL_INCREMENTING 50
 #define VIBRATION_DURATION 100
 
-uint8_t counterNumber;
-struct Counter *counters[MAX_COUNTER_NUMBER];
+extern uint8_t counterNumber;
+extern struct Counter *counters[MAX_COUNTER_NUMBER];
 
 void createCounter(const char *name, uint16_t value);
 

@@ -1,6 +1,8 @@
 #include <pebble.h>
 #include "localization.h"
 
+char *str[STRING_NUMBER];
+
 void initLocales(void)
 {
 	char *locale = setlocale(LC_ALL, "");
